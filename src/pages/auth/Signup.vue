@@ -8,15 +8,24 @@
       </div>
 
       <q-form @submit="onSubmit">
+        <!-- <q-input
+          outlined
+          label="username"
+          required
+          v-model="email"
+          class="q-pb-md"
+        /> -->
         <q-input
           outlined
-          label="email address or username"
+          type="email"
+          label="email address"
           required
           v-model="email"
           class="q-pb-md"
         />
         <q-input
           outlined
+          type="text"
           label="password"
           required
           v-model="password"
@@ -27,7 +36,7 @@
           flat
           class="bg-primary q-mt-md full-width q-py-xs"
           color="white"
-          label="login"
+          label="signup"
           type="submit"
           :disable="!email || !password"
         />
@@ -36,14 +45,14 @@
 
     <footer class="fixed-bottom text-dark bg-transparent">
       <div class="border-top text-center q-py-sm">
-        Don't have an account?
+        Already have an account?
         <q-btn
           flat
           dense
           no-caps
-          label="Sign up"
+          label="Log in"
           color="primary"
-          :to="{ name: 'Signup' }"
+          :to="{ name: 'Login' }"
         />
       </div>
     </footer>
@@ -57,6 +66,7 @@ export default {
   name: "Login",
   data() {
     return {
+      // username: "",
       email: "",
       password: "",
     };
@@ -64,8 +74,11 @@ export default {
   methods: {
     async onSubmit() {
       try {
-        const cred = await firebaseAuth.signInWithEmailAndPassword(this.email, this.password);
-        console.log(cred.user);
+        const cred = await firebaseAuth.createUserWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+        console.log(cred);
         this.$router.push({ name: 'Timeline' })
       } catch (error) {
         console.log(error);

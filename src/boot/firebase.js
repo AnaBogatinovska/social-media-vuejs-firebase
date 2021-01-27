@@ -21,11 +21,12 @@ let firebaseConfig = {
   messagingSenderId: "20576077266",
   appId: "1:20576077266:web:5742b03f3479432181f40b"
 };
-
+console.log('fibasdd', firebase)
 // Initialize Firebase
  let firebaseApp = firebase.initializeApp(firebaseConfig);
 
 let firebaseAuth  = firebaseApp.auth()
 let firebaseDb = firebaseApp.firestore()
+
 
 export { firebaseAuth, firebaseDb }
